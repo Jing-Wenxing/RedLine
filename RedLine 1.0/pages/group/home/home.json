@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "dynamic": "/pages/home/dynamic/dynamic",
+    "qa": "/pages/home/q&a/q&a",
+    "news": "/pages/home/news/news"
+  }
+}

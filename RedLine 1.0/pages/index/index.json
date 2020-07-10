@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "test": "/pages/chats/home/home",
-    "home": "/pages/home/home/home",
-    "group": "/pages/group/home/home"
-  }
-}

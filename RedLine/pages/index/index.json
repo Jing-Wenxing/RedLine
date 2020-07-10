@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "test": "/pages/chats/home/home",
+    "home": "/pages/home/home/home",
+    "group": "/pages/group/home/home",
+    "releases": "/pages/releases/home/home",
+    "chats": "/pages/chats/home/home",
+    "personal": "/pages/personal/home/home"
+  }
+}

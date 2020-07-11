@@ -1,7 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/home/home/home"
+    "pages/home/home/home",
+    "pages/chats/systemsg/systemsg",
+    "pages/chats/normalmsg/normalmsg"
   ],
   "window": {
     "backgroundTextStyle": "light",

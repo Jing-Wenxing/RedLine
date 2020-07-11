@@ -1,0 +1,6 @@
+/* pages/chats/systemsg/systemsg.wxss */
+
+.contents{
+  height: 85vh;
+  background-color:#ffffff;
+}

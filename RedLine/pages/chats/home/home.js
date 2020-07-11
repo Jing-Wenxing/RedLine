@@ -8,22 +8,9 @@ Page({
   data: {
     CustomBar: app.globalData.CustomBar,
     myurl: 'https://pic.gksec.com/2020/07/08/79d1c6f44b144/9809a0604ca7bd0dbfbf1427e46d743e.jpg',
-    iconList: [{
-      icon: 'likefill',
-      color: 'red',
-      badge: 0,
-      name: '关注'
-    }, {
-      icon: 'discoverfill',
-      color: 'blue',
-      badge: 0,
-      name: '发现'
-    }, {
-      icon: 'servicefill',
-      color: 'orange',
-      badge: 22,
-      name: '客服'
-    }],
+    attentionnum: 0,
+    foundnum: 0,
+    CustomerServernum: 0,
     gridCol: 3,
     skin: false,
     systemmessage: {
@@ -34,13 +21,12 @@ Page({
       finalTime: '17:20',
       unread: '1'
     },
-    messageList: [
-      {
+    messageList: [{
         url: 'https://pic.gksec.com/2020/07/08/561775df28517/1234d5df46sdf.jpg',
         name: '仙女夏凡',
         message: '明天周几',
         finalTime: '17:04',
-        unread: '1'
+        unread: '0'
       },
       {
         url: 'https://pic.gksec.com/2020/07/08/f3ad2e0c3b67f/n5m~__``u@uou`bu~_hdql4.jpg',

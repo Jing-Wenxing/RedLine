@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "test": "/pages/chats/home/home",
+    "test": "/pages/chats/systemsg/systemsg",
     "home": "/pages/home/home/home",
     "group": "/pages/group/home/home",
     "releases": "/pages/releases/home/home",

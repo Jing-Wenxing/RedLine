@@ -4,19 +4,35 @@
 
 <!-- 消息集合 -->
 <view class="solids-top cu-list grid col-{{gridCol}} no-border">
-	<view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
-		<view class="cuIcon-{{item.icon}} text-{{item.color}}">
-			<view class="cu-tag badge" wx:if="{{item.badge!=0}}">
-				<block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
+	<view class="cu-item">
+		<view class="cuIcon-likefill text-red">
+			<view class="cu-tag badge" wx:if="{{attentionnum!=0}}">
+				<block wx:if="{{attentionnum!=1}}">{{attentionnum>99?"99+":attentionnum}}</block>
 			</view>
 		</view>
-		<text>{{item.name}}</text>
+		<text>关注</text>
+	</view>
+	<view class="cu-item">
+		<view class="cuIcon-discoverfill text-blue">
+			<view class="cu-tag badge" wx:if="{{foundnum!=0}}">
+				<block wx:if="{{foundnum!=1}}">{{foundnum>99?"99+":foundnum}}</block>
+			</view>
+		</view>
+		<text>发现</text>
+	</view>
+	<view class="cu-item">
+		<view class="cuIcon-servicefill text-orange">
+			<view class="cu-tag badge" wx:if="{{CustomerServernum!=0}}">
+				<block wx:if="{{CustomerServernum!=1}}">{{CustomerServernum>99?"99+":CustomerServernum}}</block>
+			</view>
+		</view>
+		<text>客服</text>
 	</view>
 </view>
 
 <view class="cu-list menu-avatar">
 	<!-- 系统消息 -->
-	<navigator hover-class='none' url="/pages/chats/single/single?title={{systemmessage.name}}&myurl={{myurl}}&friendurl={{systemmessage.url}}&icon={{systemmessage.icon}}&iconstyle={{systemmessage.iconstyle}}" class="cu-item solids-bottom">
+	<navigator hover-class='none' url="/pages/chats/systemsg/systemsg?title={{systemmessage.name}}&myurl={{myurl}}&friendurl={{systemmessage.url}}&icon={{systemmessage.icon}}&iconstyle={{systemmessage.iconstyle}}" class="cu-item solids-bottom">
 		<!-- 头像 -->
 		<view class="cu-avatar round lg cuIcon-{{systemmessage.icon}} {{systemmessage.iconstyle}}" style="background-image:url({{systemmessage.url}});"></view>
 		<!-- 消息 -->
@@ -36,7 +52,7 @@
 	</navigator>
 
 	<!-- 普通消息 -->
-	<navigator hover-class='none' url="/pages/chats/single/single?title={{item.name}}&myurl={{myurl}}&friendurl={{item.url}}&icon={{item.icon}}&iconstyle={{item.iconstyle}}" class="cu-item solids-bottom" wx:for="{{messageList}}" wx:key>
+	<navigator hover-class='none' url="/pages/chats/normalmsg/normalmsg?title={{item.name}}&myurl={{myurl}}&friendurl={{item.url}}" class="cu-item solids-bottom" wx:for="{{messageList}}" wx:key>
 		<!-- 头像 -->
 		<view class="cu-avatar round lg cuIcon-{{item.icon}} {{item.iconstyle}}" style="background-image:url({{item.url}});"></view>
 		<!-- 消息 -->
@@ -50,8 +66,8 @@
 		</view>
 		<!-- 信息 -->
 		<view class="action">
-			<view class="text-grey text-xs">{{item.finalTime}}</view>
-			<view class="cu-tag round bg-red sm">{{item.unread}}</view>
+			<view class="text-grey text-xs" style="margin-bottom:{{item.unread!='0'?'0':'15'}}px;">{{item.finalTime}}</view>
+			<view class="cu-tag round bg-red sm" wx:if="{{item.unread!='0'}}">{{item.unread}}</view>
 		</view>
 	</navigator>
 </view>

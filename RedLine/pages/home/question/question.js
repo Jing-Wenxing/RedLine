@@ -1,14 +1,11 @@
-// pages/home/home/home.js
-const app = getApp();
+// pages/home/question/question.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    CustomBar: app.globalData.CustomBar,
-    // tab切换  
-    currentTab: 0
+
   },
 
   /**
@@ -65,16 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  swichNav: function (e) {
-    var that = this;
-    if (this.data.currentTab === e.target.dataset.current) {
-      return false;
-    } else {
-      that.setData({
-        currentTab: e.target.dataset.current,
-      })
-    }
-  },
+  }
 })

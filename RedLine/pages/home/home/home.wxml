@@ -1,3 +1,27 @@
-<cu-custom bgColor="bg-white">
-	<view slot="content">首页</view>
-</cu-custom>
+<!-- <cu-custom bgColor="bg-white">
+	<view slot="content">
+首页
+	</view>
+</cu-custom> -->
+
+<view class="bares cu-bar bg-white fixed">
+	<scroll-view class="bg-white nav text-center">
+		<view class="cu-item {{0==currentTab?'text-red cur':''}}" bindtap="swichNav" data-current="0">
+			动态
+		</view>
+		<view class="cu-item {{1==currentTab?'text-red cur':''}}" bindtap="swichNav" data-current="1">
+			问答
+		</view>
+		<view class="cu-item {{2==currentTab?'text-red cur':''}}" bindtap="swichNav" data-current="2">
+			热评
+		</view>
+	</scroll-view>
+</view>
+
+<view class="contentes">
+	<dynamic wx:if="{{currentTab=='0'}}"></dynamic>
+	<question wx:if="{{currentTab=='1'}}"></question>
+	<news wx:if="{{currentTab=='2'}}"></news>
+
+	<view class='cu-tabbar-height'></view>
+</view>

@@ -1,3 +1,11 @@
 @import "/colorui/main.wxss";
 @import "/colorui/icon.wxss";
 @import "/colorui/animation.wxss";
+
+.bares {
+  padding-top: 50rpx;
+}
+
+.contentes {
+  padding-top: 150rpx;
+}

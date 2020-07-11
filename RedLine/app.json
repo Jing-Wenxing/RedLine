@@ -3,7 +3,10 @@
     "pages/index/index",
     "pages/home/home/home",
     "pages/chats/systemsg/systemsg",
-    "pages/chats/normalmsg/normalmsg"
+    "pages/chats/normalmsg/normalmsg",
+    "pages/home/dynamic/dynamic",
+    "pages/home/question/question",
+    "pages/home/news/news"
   ],
   "window": {
     "backgroundTextStyle": "light",

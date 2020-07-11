@@ -1,0 +1,19 @@
+<view class="img-box">
+	<view class="cu-card case">
+		<view class="cu-item shadow">
+			<view class="image bg-white">
+				<image src="{{imageurl}}" mode="aspectFill"></image>
+			</view>
+			<view class="cu-list menu-avatar solid{{boxtext!=''?'':'s'}}-top">
+				<view class="textes">{{boxtext}}</view>
+				<view class="message flex justify-between">
+					<view class="flex justify-between">
+						<view class="cu-avatar sm round margin-right" style="background-image:url({{userurl}});"></view>
+						<view class="text-grey">{{username}}</view>
+					</view>
+          <button class="cu-btn cuIcon-likefill round sm bg-grey shadow line text-red"></button>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

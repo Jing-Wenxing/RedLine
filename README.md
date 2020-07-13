@@ -42,3 +42,12 @@
 
 - 消息页个人消息搭建
 - 消息页系统消息搭建
+
+### 2020.07.12
+
+- [扩展组件学习](https://developers.weixin.qq.com/miniprogram/dev/extended/)
+
+### 2020.07.13
+
+- 扩展组件引入与技术实现
+

@@ -1,0 +1,33 @@
+<test wx:if="{{PageCur=='test'}}"></test>
+<home wx:if="{{PageCur=='home'}}"></home>
+<!-- <group wx:if="{{PageCur=='group'}}"></group>
+<releases wx:if="{{PageCur=='releases'}}"></releases>
+<chats wx:if="{{PageCur=='chats'}}"></chats>
+<personal wx:if="{{PageCur=='personal'}}"></personal> -->
+
+<view class="cu-bar tabbar bg-white shadow foot">
+	<view class="action" bindtap="NavChange" data-cur="test">
+		<view class="{{PageCur=='test'?'cuIcon-attentionfill':'cuIcon-attention'}}"></view>
+		<view class="{{PageCur=='test'?'text-balck':'text-gray'}}">测试</view>
+	</view>
+	<view class="action" bindtap="NavChange" data-cur="home">
+		<view class="{{PageCur=='home'?'cuIcon-homefill':'cuIcon-home'}}"></view>
+		<view class="{{PageCur=='home'?'text-balck':'text-gray'}}">首页</view>
+	</view>
+	<view class="action" bindtap="NavChange" data-cur="group">
+		<view class="{{PageCur=='group'?'cuIcon-group_fill':'cuIcon-group'}}"></view>
+		<view class="{{PageCur=='group'?'text-balck':'text-gray'}}">圈子</view>
+	</view>
+	<!-- <view class="action add-action"  bindtap="NavChange" data-cur="releases">
+		<button class="cu-btn cuIcon-add bg-red shadow"></button>
+		<view class="{{PageCur=='releases'?'text-balck':'text-gray'}}">发布</view>
+	</view>
+	<view class="action" bindtap="NavChange" data-cur="chats">
+		<view class="{{PageCur=='chats'?'cuIcon-communityfill':'cuIcon-community'}}"></view>
+		<view class="{{PageCur=='chats'?'text-balck':'text-gray'}}">消息</view>
+	</view> -->
+	<view class="action" bindtap="NavChange" data-cur="personal">
+		<view class="{{PageCur=='personal'?'cuIcon-peoplefill':'cuIcon-people'}}"></view>
+		<view class="{{PageCur=='personal'?'text-balck':'text-gray'}}">我的</view>
+	</view>
+</view>

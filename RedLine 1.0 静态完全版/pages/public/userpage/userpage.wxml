@@ -1,0 +1,85 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="content">我的</view>
+</cu-custom>
+
+<view class="msg solids-top">
+	<view class="flex align-items personal">
+		<view class="flex p-xs mb-sm">
+			<view class="flex-sub padding-sm margin-xs radius">
+				<view class="cu-avatar round xxl" style="background-image:url({{personal.userurl}});">
+				</view>
+			</view>
+			<view class="flex-twice padding-sm margin-xs radius">
+				<view class="flex personality1">
+					<view class="singlepersonality">
+						<view class="text-xxl text-align" style="font-weight: bold;">{{messageLists.length}}</view>
+						<view class="text-xs text-align">动态</view>
+					</view>
+					<view class="singlepersonality">
+						<view class="text-xxl text-align" style="font-weight: bold;">{{personal.group}}</view>
+						<view class="text-xs text-align">圈子</view>
+					</view>
+				</view>
+				<view class="flex personality margin-top">
+					<button class="cu-btn round bg-grey shadow line text-black text-sm" style="padding: 0 150rpx; height: 50rpx;" bindtap="modificationpage">资料查看</button>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="margin-left margin-right flex">
+		<view class="text-xxl">{{personal.username}}</view>
+		<view class="cuIcon-{{personal.sex=='男'?'male':''}} cuIcon-{{personal.sex=='女'?'female':''}} text-{{personal.sex=='男'?'blue':''}} text-{{personal.sex=='女'?'red':''}} text-xl xl"></view>
+	</view>
+
+	<view class="margin-left margin-right flex justify-between rowss padding-bottom" style="align-items:center; ">
+		<view><text>{{personal.signature}}</text></view>
+	</view>
+</view>
+
+<view class="flex justify-center text-gray margin" wx:if="{{messageLists.length==0}}">
+	发布你的第一篇动态吧
+</view>
+
+<view class="margin-top-sm" wx:for="{{messageLists}}" wx:key="index">
+	<view class="flex">
+		<view class="{{item.style==0?'basis-sm':'basis-all'}} padding-left-sm padding-right-sm">
+			<view class="flex justify-between" style="align-items:center;">
+				<view class="text-bold">
+					<wxs src="./userpage.wxs" module="tools" />
+					<text class="text-xxl">{{tools.day(item.date)}}</text>
+					<text class="text-l">/{{tools.month(item.date)}}月</text>
+				</view>
+			</view>
+
+			<view wx:if="{{item.style==0}}" class="text-cut3" style="height: 250rpx;">
+				{{item.boxtext}}
+			</view>
+
+			<view wx:if="{{item.style==1}}" class="text-cut3" style="height: 135rpx;">
+				{{item.boxtext}}
+			</view>
+
+			<view class="margin-top-sm">
+				<button class="cu-btn cuIcon-more round sm bg-grey shadow line text-black margin-right-sm" bindtap="detailpage" data-smile='{{item.cid}}'>
+				</button>
+				<button class="cu-btn cuIcon-delete round sm bg-grey shadow line text-black margin-right-sm"></button>
+			</view>
+		</view>
+
+		<view wx:if="{{item.style==0}}" class="basis-lg margin-left-xs margin-right-xs">
+			<swiper class="screen-swiper bg-gray" indicator-dots="true" circular="true" style="height: 400rpx;">
+				<swiper-item wx:for="{{item.imageurl}}" wx:key>
+					<image src="{{item.url}}" mode="aspectFit"></image>
+				</swiper-item>
+			</swiper>
+		</view>
+	</view>
+</view>
+
+<view class="flex justify-center text-gray" style="margin-top: 30rpx;">
+————— 到底了 ——————
+</view>
+
+<view class="cu-tabbar-height" style="margin-top: 10rpx;">
+</view>

@@ -1,0 +1,4 @@
+/* pages/personal/publish/publish.wxss */
+.dsd{
+  background-color: white; 
+}

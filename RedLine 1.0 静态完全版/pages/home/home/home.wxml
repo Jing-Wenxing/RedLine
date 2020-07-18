@@ -1,0 +1,21 @@
+<cu-custom bgColor="bg-white">
+	<view slot="content">首页</view>
+</cu-custom>
+
+<view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px;">
+	<view class="action">
+		<mp-icon icon="add2" color="grey" size="{{21}}" bindtap="pagechangeadd"></mp-icon>
+	</view>
+	<view class="search-form round">
+		<text class="cuIcon-search"></text>
+		<input type="text" placeholder="输入搜索的关键词" confirm-type="search" bindinput="updatesearchvalue" value='{{searchvalue}}'></input>
+	</view>
+	<view class="action">
+		<button class="cu-btn bg-red shadow-blur round" bindtap="pagechangesearch">搜索</button>
+	</view>
+</view>
+
+<view class="contentes">
+	<dynamic></dynamic>
+	<view class='cu-tabbar-height' style="margin-top: 20rpx;"></view>
+</view>

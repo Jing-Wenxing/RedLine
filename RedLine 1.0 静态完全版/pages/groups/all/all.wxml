@@ -1,0 +1,35 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="content" style="color: balck">
+		全部圈子
+	</view>
+</cu-custom>
+
+<view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px">
+	<view class="search-form round">
+		<text class="cuIcon-search"></text>
+		<input type="text" placeholder="搜索圈子" confirm-type="search" bindinput="searchIcon"></input>
+	</view>
+</view>
+
+<view class="groups we">
+	<view class="cu-list menu-avatar recommendlist">
+		<view class="cu-item padding solids-bottom" wx:for="{{groupList}}" wx:key wx:if="{{item.isShow}}">
+
+			<view class="cu-avatar radius lg {{item.iconstyle}}" style="background-image:url({{item.url}});">{{item.iconname}}</view>
+			<view class="content">
+				<navigator hover-class='none' url="/pages/groups/single/single?cid={{item.cid}}&name={{item.name}}">
+					<view class="text-grey">
+						<text class="text-cut text-lg">{{item.name}}</text>
+					</view>
+					<view class="text-gray flex" style="padding-top: 5px;">
+						<view wx:for="{{item.tags}}" wx:key>
+							<view class="cu-tag round line-{{item.tag_color}}" style="margin-right: 5px;">{{item.tag_name}}</view>
+						</view>
+					</view>
+				</navigator>
+			</view>
+			<wxs src="./all.wxs" module="tools" />
+			<switch checked="{{tools.judge(member, item.cid)}}"></switch>
+		</view>
+	</view>
+</view>

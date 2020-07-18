@@ -1,0 +1,68 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="content" style="color: balck" wx-if="{{data.style!=2}}">
+		{{data.title}}
+	</view>
+	<view slot="content" style="color: balck" wx-if="{{data.style==2}}">
+		简历
+	</view>
+</cu-custom>
+
+<view class="padding bg-white">
+	<view>传入动态的id标签，调用加载函数</view>
+	<view>cid</view>
+	<view>ID值：{{cid}}</view>
+</view>
+
+<view class="contnet margin" wx-if="{{data.style==0}}">
+	<swiper class="screen-swiper square-dot bg-white" indicator-dots="true" circular="true" style="height: 700rpx;">
+		<swiper-item wx:for="{{data.imageurl}}" wx:key>
+			<image src="{{item.url}}" mode="aspectFit"></image>
+		</swiper-item>
+	</swiper>
+
+	<view class="bg-white padding">
+		<view class="padding-bottom-sm">{{data.boxtext}}</view>
+		<navigator hover-class='none' url="/pages/public/userpage/userpage?username={{username}}">
+			<view class="flex" style="align-items: center;">
+				<view class="cu-avatar sm round margin-right" style="background-image:url({{data.userurl}});"></view>
+				<view class="text-grey">{{data.username}}</view>
+			</view>
+		</navigator>
+	</view>
+</view>
+
+<view class="contnet margin" wx-if="{{data.style==1}}">
+	<view class="bg-{{data.cardcolor}} light padding">
+		<view class="padding-bottom-sm text-black">{{data.boxtext}}</view>
+		<navigator hover-class='none' url="/pages/public/userpage/userpage?username={{username}}">
+			<view class="flex" style="align-items: center;">
+				<view class="cu-avatar sm round margin-right" style="background-image:url({{data.userurl}});"></view>
+				<view class="text-grey">{{data.username}}</view>
+			</view>
+		</navigator>
+	</view>
+</view>
+
+<view class="contnet margin" wx-if="{{data.style==2}}">
+	<view class="bg-{{data.cardcolor}} light padding">
+		<view class="padding-bottom">
+			<view class="text-cut text-black text-lg margin-bottom-sm">
+				{{data.name}} 同学
+			</view>
+			<view class="text-cut text-black">
+				{{data.grade}}级 {{data.profession}}{{data.class}}班级
+			</view>
+			<view class="text-cut text-black margin-bottom-sm">
+				就职于{{data.company}}
+			</view>
+			<text class="text-cut3 text-black">简介：{{data.introduction}}
+					</text>
+		</view>
+		<navigator hover-class='none' url="/pages/public/userpage/userpage?username={{username}}">
+			<view class="flex" style="align-items: center;">
+				<view class="cu-avatar sm round margin-right" style="background-image:url({{data.userurl}});"></view>
+				<view class="text-grey">{{data.username}}</view>
+			</view>
+		</navigator>
+	</view>
+</view>

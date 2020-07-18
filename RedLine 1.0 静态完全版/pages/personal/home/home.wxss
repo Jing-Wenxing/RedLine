@@ -1,0 +1,31 @@
+@import "/colorui/main.wxss";
+@import "/colorui/icon.wxss";
+@import "/colorui/animation.wxss";
+
+.msg {
+  padding: 20rpx 20rpx 0rpx 20rpx;
+  background-color: #ffffff;
+}
+
+.avatarsize {
+  width: 175rpx;
+  height: 175rpx;
+  font-size: 2.5em;
+}
+
+.personality {
+  width: 450rpx;
+  justify-content: center;
+}
+
+.singlepersonality {
+  width: 150rpx;
+  text-align: center;
+}
+
+.rowss {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}

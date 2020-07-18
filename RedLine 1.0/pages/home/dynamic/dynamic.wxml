@@ -1,5 +1,0 @@
-<view wx:for="{{messageLists}}" wx:key="index">
-	<card-graphic wx-if="{{item.style==0}}" userurl='{{item.userurl}}' username='{{item.username}}' imageurl='{{item.imageurl}}' boxtext='{{item.boxtext}}'></card-graphic>
-	<card-resume wx-if="{{item.style==1}}" userurl='{{item.userurl}}' username='{{item.username}}' cardcolor='{{item.cardcolor}}' company='{{item.company}}' grade='{{item.grade}}' profession='{{item.profession}}' class='{{item.class}}' name='{{item.name}}' introduction='{{item.introduction}}'></card-resume>
-	<crad-text wx-if="{{item.style==2}}" userurl='{{item.userurl}}' username='{{item.username}}' cardcolor='{{item.cardcolor}}' boxtext='{{item.boxtext}}'></crad-text>
-</view>

@@ -1,0 +1,50 @@
+<view class='cu-custom'>
+	<view class="cu-bar fixed bg-shadeTop" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+		<navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+			<text class='cuIcon-back'></text>
+		</navigator>
+		<view class='content' style='top:{{StatusBar}}px;'>{{name}}</view>
+	</view>
+</view>
+
+<view class="cu-card case {{isCard?'no-card':''}}">
+	<view class="cu-item shadow">
+		<view class="image">
+			<image src="{{groupcontent.avatarurl}}" mode='center widthFix' style="height: 400rpx; width: 100%;"></image>
+			<view class="cu-bar bg-shadeBottom" style="display: block !important;">
+				<view class="text-cut5 margin-bottom-sm">{{groupcontent.description}}</view>
+				<view class="flex justify-between margin-bottom-sm">
+					<view class="flex">
+						<view wx:for="{{groupcontent.grouptag}}" wx:key>
+							<text class="text-bold margin-right-sm">{{item.tagtext}}</text>
+						</view>
+					</view>
+					<view>
+						<button class="cu-btn cuIcon-likefill round sm bg-black shadow line text-{{groupcontent.love?'red':'gray'}}" bindtap="lovechange" data-love="{{groupcontent.love}}" data-index="{{index}}"></button>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+
+<view class="cu-bar bg-white search fixed" style="top:400rpx">
+	<view class="search-form round">
+		<text class="cuIcon-search"></text>
+		<input type="text" placeholder="搜索用户" confirm-type="search" bindinput="searchIcon"></input>
+	</view>
+</view>
+
+<view class="cu-list grid col-3 we">
+	<view class="cu-item align-center" wx:for="{{groupcontent.people}}" wx:key wx:if="{{item.isShow}}">
+		<navigator hover-class='none' url="/pages/public/userpage/userpage?uid={{item.uid}}">
+			<text class="cu-avatar round lg" style="background-image:url({{item.url}});"></text>
+			<text>{{item.name}}</text>
+		</navigator>
+	</view>
+</view>
+
+<view class="padding bg-white">
+	<view>传入圈子的cid，根据cid获取全部的圈子json</view>
+	<view>ID值：{{cid}}</view>
+</view>

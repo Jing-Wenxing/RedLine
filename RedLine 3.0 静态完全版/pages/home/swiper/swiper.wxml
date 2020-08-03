@@ -1,0 +1,83 @@
+<view class="topswiper">
+	<swiper class="card-swiper round-dot" indicator-dots="flase" circular="true" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="red">
+
+		<!-- 暂无数据 -->
+		<swiper-item class="cur" wx:if="{{swiperList.length==0}}">
+			<view class="swiper-item single">
+				<view class="cu-card case">
+					<view class="cu-item shadow bg-white padding radius">
+						<!-- 按钮栏 -->
+						<view class="flex justify-between">
+							<view></view>
+							<button class="cu-btn cuIcon-likefill round sm bg-grey shadow line text-gray"></button>
+						</view>
+
+						<!-- 圈子头像 -->
+						<view class="flex justify-center align-center margin-bottom" style="height: 35vh;">
+							<view class="cu-avatar max round">
+								<text class="cuIcon-add" ></text>
+							</view>
+						</view>
+
+						<!-- 圈子信息 -->
+						<view class="margin-top-xl" style="height: 40vh;">
+							<view class="text-xl text-bold text-black text-center margin-bottom">暂无数据</view>
+							<view class="text-center margin-bottom">请加入圈子</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</swiper-item>
+
+		<!-- 有数据 -->
+		<swiper-item else wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
+			<view class="swiper-item single">
+				<view class="cu-card case">
+					<view class="cu-item shadow bg-white padding radius">
+						<!-- 按钮栏 -->
+						<view class="flex justify-between">
+							<navigator hover-class='none' url="/pages/groups/single/single?cid={{item.cid}}&name={{item.groupname}}">
+								<button class="cu-btn cuIcon-more round sm bg-grey shadow line text-black">
+								</button>
+							</navigator>
+							<button class="cu-btn cuIcon-likefill round sm bg-grey shadow line text-{{item.love?'red':'gray'}}" bindtap="lovechange" data-love="{{item.love}}" data-index="{{index}}"></button>
+						</view>
+
+						<!-- 圈子头像 -->
+						<view class="flex justify-center align-center" style="height: 35vh;">
+							<view class="cu-avatar max round" style="background-image:url({{item.avatarurl}});"></view>
+						</view>
+
+						<!-- 圈子信息 -->
+						<view class="margin-top">
+							<view class="text-xl text-bold text-black margin-bottom">{{item.groupname}}</view>
+							<!-- 圈子标签 -->
+							<view class="flex p-xs margin-bottom-sm mb-sm">
+								<view class="flex flex-sub radius justify-center">
+									<view class="cu-tag line-grey round">标 签</view>
+								</view>
+								<view class="flex flex-treble radius">
+									<view wx:for="{{item.grouptag}}" wx:key>
+										<text class="text-bold margin-right-sm">{{item.tagtext}}</text>
+									</view>
+								</view>
+							</view>
+							<!-- 描述 -->
+							<view class="flex p-xs margin-bottom-sm mb-sm" style="height: 25vh;">
+								<view class="flex flex-sub radius justify-center">
+									<view class="cu-tag line-grey round">描 述</view>
+								</view>
+								<view class="flex flex-treble radius">
+									<scroll-view scroll-y="true" style="height: 200rpx">
+										<text>{{item.description}}</text>
+									</scroll-view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</swiper-item>
+
+	</swiper>
+</view>

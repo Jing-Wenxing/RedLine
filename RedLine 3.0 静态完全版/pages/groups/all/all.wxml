@@ -1,0 +1,38 @@
+<cu-custom bgColor="bg-white">
+	<view slot="content" style="color: balck">
+		全部圈子
+	</view>
+</cu-custom>
+
+<view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px">
+	<view class="search-form round">
+		<text class="cuIcon-search"></text>
+		<input type="text" placeholder="搜索圈子" confirm-type="search" bindinput="searchIcon"></input>
+	</view>
+</view>
+
+<view class="we">
+	<view class="cu-list menu-avatar recommendlist">
+		<view class="cu-item padding solids-bottom" wx:for="{{groupList}}" wx:key wx:if="{{item.isShow}}">
+			<view class="cu-avatar radius lg" style="background-image:url({{item.avatarurl}});">{{item.iconname}}</view>
+			<view class="content">
+				<navigator hover-class='none' url="/pages/groups/single/single?cid={{item.cid}}&name={{item.groupname}}">
+					<view class="text-grey">
+						<text class="text-cut text-lg text-black">{{item.groupname}}</text>
+					</view>
+					<view class="text-gray flex" style="padding-top: 5px;">
+						<view wx:for="{{item.grouptag}}" wx:key>
+							<view class="cu-tag round line-gray" style="margin-right: 5px;">{{item.tagtext}}</view>
+						</view>
+					</view>
+				</navigator>
+			</view>
+			<view class="action">
+				<button class="cu-btn cuIcon-likefill round sm bg-grey shadow line text-{{item.love?'red':'gray'}}" bindtap="lovechange" data-love="{{item.love}}" data-index="{{index}}"></button>
+			</view>
+		</view>
+
+	</view>
+</view>
+
+<view class='cu-tabbar-height'></view>

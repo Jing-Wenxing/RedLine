@@ -1,0 +1,27 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/home/home/home",
+    "pages/home/search/search",
+    "pages/home/swiper/swiper",
+    "pages/groups/single/single",
+    "pages/groups/all/all",
+    "pages/personal/home/home",
+    "pages/personal/modification/modification",
+    "pages/public/userpage/userpage",
+    "pages/public/usergroups/usergroups",
+    "pages/public/userprofile/userprofile",
+    "pages/personal/workresume/workresume"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "ColorUI",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}

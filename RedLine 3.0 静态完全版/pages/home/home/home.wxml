@@ -1,0 +1,25 @@
+<cu-custom bgColor="bg-white">
+	<view slot="content">首页</view>
+</cu-custom>
+
+<view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px;">
+	<view class="action">
+		<picker mode="region" bindchange="bindAreaChange" value="{{area}}">
+			<view class="picker">
+				<text class="cuIcon-triangledownfill"></text>
+				<text>{{area[1]}}</text>
+			</view>
+		</picker>
+	</view>
+	<view class="search-form round">
+		<text class="cuIcon-search"></text>
+		<input type="text" placeholder="输入搜索的关键词" confirm-type="search" bindinput="updatesearchvalue" value='{{searchvalue}}'></input>
+	</view>
+	<view class="action">
+		<button class="cu-btn bg-red shadow-blur round" bindtap="pagechangesearch">搜索</button>
+	</view>
+</view>
+
+<swiper></swiper>
+
+<view class='cu-tabbar-height'></view>

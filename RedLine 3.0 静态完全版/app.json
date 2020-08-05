@@ -13,6 +13,29 @@
     "pages/public/userprofile/userprofile",
     "pages/personal/workresume/workresume"
   ],
+  "tabBar": {
+    "color": "#a9a9a9",
+    "selectedColor": "#666666",
+    "list": [{
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "./images/home_light.png",
+        "selectedIconPath": "./images/home_drak.png"
+      },
+      {
+        "pagePath": "pages/groups/all/all",
+        "text": "圈子",
+        "iconPath": "./images/groups_light.png",
+        "selectedIconPath": "./images/groups_drak.png"
+      },
+      {
+        "pagePath": "pages/personal/home/home",
+        "text": "我的",
+        "iconPath": "./images/personal_light.png",
+        "selectedIconPath": "./images/personal_drak.png"
+      }
+    ]
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

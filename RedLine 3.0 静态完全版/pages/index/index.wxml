@@ -13,7 +13,7 @@
 </view>
 
 <view wx:else>
-	<view wx:if="{{psrsonal.username==''||psrsonal.firstname==''||psrsonal.lastname==''||psrsonal.grade==''||psrsonal.profession==''||psrsonal.class==''||psrsonal.area==''||psrsonal.username==null||psrsonal.firstname==null||psrsonal.lastname==null||psrsonal.grade==null||psrsonal.profession==null||psrsonal.class==null||psrsonal.area==null||save}}">
+	<view wx:if="{{personal.username==''||personal.firstname==''||personal.lastname==''||personal.grade==''||personal.profession==''||personal.class==''||personal.area==''||personal.username==null||personal.firstname==null||personal.lastname==null||personal.grade==null||personal.profession==null||personal.class==null||personal.area==null||save}}">
 		<cu-custom bgColor="bg-white">
 			<view slot="content" style="color: balck">资料填写</view>
 		</cu-custom>
@@ -24,7 +24,7 @@
 					<text class="text-grey">昵称</text>
 				</view>
 				<view class="action text-right">
-					<input placeholder="请填入昵称" value="{{psrsonal.username}}" maxlength="{{10}}" data-name='psrsonal.username' bindinput="inputs"></input>
+					<input placeholder="请填入昵称" value="{{personal.username}}" maxlength="{{10}}" data-name='personal.username' bindinput="inputs"></input>
 				</view>
 			</view>
 			<view class="cu-item">
@@ -32,7 +32,7 @@
 					<text class="text-grey">姓</text>
 				</view>
 				<view class="action text-right">
-					<input placeholder="请填入真实的姓氏" value="{{psrsonal.firstname}}" maxlength="{{5}}" data-name='psrsonal.firstname' bindinput="inputs"></input>
+					<input placeholder="请填入真实的姓氏" value="{{personal.firstname}}" maxlength="{{5}}" data-name='personal.firstname' bindinput="inputs"></input>
 				</view>
 			</view>
 			<view class="cu-item">
@@ -40,7 +40,7 @@
 					<text class="text-grey">名</text>
 				</view>
 				<view class="action text-right">
-					<input placeholder="请填入真实的名字" value="{{psrsonal.lastname}}" maxlength="{{5}}" data-name='psrsonal.lastname' bindinput="inputs"></input>
+					<input placeholder="请填入真实的名字" value="{{personal.lastname}}" maxlength="{{5}}" data-name='personal.lastname' bindinput="inputs"></input>
 				</view>
 			</view>
 			<view class="cu-item">
@@ -50,7 +50,7 @@
 				<view class="action text-right">
 					<picker mode="selector" bindchange="bindGradeChange" range="{{gradearray}}">
 						<view class="picker">
-							<text>{{psrsonal.grade}} 级</text>
+							<text>{{personal.grade}} 级</text>
 						</view>
 					</picker>
 				</view>
@@ -60,7 +60,7 @@
 					<text class="text-grey">专业</text>
 				</view>
 				<view class="action text-right">
-					<input placeholder="请填入正确的专业名" value="{{psrsonal.profession}}" maxlength="{{10}}" data-name='psrsonal.profession' bindinput="inputs"></input>
+					<input placeholder="请填入正确的专业名" value="{{personal.profession}}" maxlength="{{10}}" data-name='personal.profession' bindinput="inputs"></input>
 				</view>
 			</view>
 			<view class="cu-item">
@@ -70,7 +70,7 @@
 				<view class="action text-right">
 					<picker mode="selector" bindchange="bindClassChange" range="{{classarray}}">
 						<view class="picker">
-							<text>{{psrsonal.class}} 班</text>
+							<text>{{personal.class}} 班</text>
 						</view>
 					</picker>
 				</view>
@@ -80,9 +80,9 @@
 					<text class="text-grey">地点</text>
 				</view>
 				<view class="action text-right">
-					<picker mode="region" bindchange="bindAreaChange" value="{{psrsonal.area}}">
+					<picker mode="region" bindchange="bindAreaChange" value="{{personal.area}}">
 						<view class="picker">
-							<text>{{psrsonal.area[0]}} {{psrsonal.area[1]}} {{psrsonal.area[2]}}</text>
+							<text>{{personal.area[0]}} {{personal.area[1]}} {{personal.area[2]}}</text>
 							<text class="cuIcon-triangledownfill"></text>
 						</view>
 					</picker>
@@ -96,23 +96,6 @@
 	</view>
 
 	<view wx:else>
-		<home wx:if="{{PageCur=='home'}}"></home>
-		<group wx:if="{{PageCur=='group'}}"></group>
-		<personal wx:if="{{PageCur=='personal'}}"></personal>
-
-		<view class="cu-bar tabbar bg-white shadow foot">
-			<view class="action" bindtap="NavChange" data-cur="home">
-				<view class="{{PageCur=='home'?'cuIcon-homefill':'cuIcon-home'}}"></view>
-				<view class="{{PageCur=='home'?'text-balck':'text-gray'}}">首页</view>
-			</view>
-			<view class="action" bindtap="NavChange" data-cur="group">
-				<view class="{{PageCur=='group'?'cuIcon-group_fill':'cuIcon-group'}}"></view>
-				<view class="{{PageCur=='group'?'text-balck':'text-gray'}}">圈子</view>
-			</view>
-			<view class="action" bindtap="NavChange" data-cur="personal">
-				<view class="{{PageCur=='personal'?'cuIcon-peoplefill':'cuIcon-people'}}"></view>
-				<view class="{{PageCur=='personal'?'text-balck':'text-gray'}}">我的</view>
-			</view>
-		</view>
+		<home></home>
 	</view>
 </view>

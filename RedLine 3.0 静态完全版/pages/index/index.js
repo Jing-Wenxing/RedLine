@@ -14,38 +14,38 @@ Page({
     save: false,
     gradearray: [],
     classarray: ['1', '2', '3', '4', '5', '6', '7', '8', ],
-    psrsonal: {
-      username: '',
-      firstname: '',
-      lastname: '',
-      grade: '',
-      profession: '',
-      class: '',
-      area: '',
+    personal: {
+      // username: '',
+      // firstname: '',
+      // lastname: '',
+      // grade: '',
+      // profession: '',
+      // class: '',
+      // area: '',
 
-      // username: '清欢挽歌',
-      // firstname: '长',
-      // lastname: '者',
-      // grade: '2018',
-      // profession: '计算机科学与技术',
-      // class: '1',
-      // area: ['湖南省', '长沙市', '芙蓉区'],
+      username: '清欢挽歌',
+      firstname: '长',
+      lastname: '者',
+      grade: '2018',
+      profession: '计算机科学与技术',
+      class: '1',
+      area: ['湖南省', '长沙市', '芙蓉区'],
     }
   },
   bindGradeChange: function (e) {
-    var url = 'psrsonal.grade'
+    var url = 'personal.grade'
     this.setData({
       [url]: this.data.gradearray[e.detail.value]
     })
   },
   bindClassChange: function (e) {
-    var url = 'psrsonal.class'
+    var url = 'personal.class'
     this.setData({
       [url]: this.data.classarray[e.detail.value]
     })
   },
   bindAreaChange: function (e) {
-    var url = 'psrsonal.area'
+    var url = 'personal.area'
     this.setData({
       [url]: e.detail.value
     })

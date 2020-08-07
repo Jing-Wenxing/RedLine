@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "test": "/pages/public/userpage/userpage",
-    "home": "/pages/home/home/home",
-    "groups": "/pages/groups/home/home",
-    "personal": "/pages/personal/home/home"
-  }
-}

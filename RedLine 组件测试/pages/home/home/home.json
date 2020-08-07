@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "dynamic": "/pages/home/dynamic/dynamic",
-    "question": "/pages/home/question/question",
-    "news": "/pages/home/news/news"
-  }
-}

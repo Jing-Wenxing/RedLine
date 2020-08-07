@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "card-graphic":"/components/card-graphic/card-graphic",
-    "card-resume":"/components/card-resume/card-resume",
-    "crad-text":"/components/crad-text/crad-text"
-  }
-}

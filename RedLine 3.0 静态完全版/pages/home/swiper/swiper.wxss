@@ -1,7 +1,0 @@
-.topswiper {
-	margin-top: 100rpx;
-}
-
-.single {
-	height: 75vh;
-}

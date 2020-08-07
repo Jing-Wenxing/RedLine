@@ -1,9 +1,0 @@
-@import "colorui/main.wxss";
-@import "colorui/icon.wxss";
-@import "colorui/animation.wxss";
-
-.container {
-  width: 100%;
-  height: 500rpx;
-  box-sizing: border-box;
-}

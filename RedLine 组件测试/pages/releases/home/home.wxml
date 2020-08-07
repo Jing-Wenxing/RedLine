@@ -1,3 +1,0 @@
-<cu-custom bgColor="bg-white">
-	<view slot="content">发布</view>
-</cu-custom>

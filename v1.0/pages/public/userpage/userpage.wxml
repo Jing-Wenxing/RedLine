@@ -1,0 +1,32 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="content" style="color: balck">
+		ta的页面{{uid}}
+	</view>
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage">
+	<view class="UCenter-bg">
+		<view class="cu-avatar xxl round margin-bottom" style="background-image:url({{people.avatarurl}});"></view>
+		<view class="text-xl">{{people.username}}</view>
+		<view class="margin-top-sm">
+			<text class="padding-left padding-right text-cut">{{people.signature}}</text>
+		</view>
+	</view>
+
+	<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+		<view class="cu-item arrow">
+			<navigator class="content" url="/pages/public/userprofile/userprofile?uid={{uid}}" hover-class="none">
+				<text class="cuIcon-profile text-blue"></text>
+				<text class="text-grey">ta的资料</text>
+			</navigator>
+		</view>
+
+		<view class="cu-item arrow">
+			<navigator class="content" url="/pages/public/usergroups/usergroups?uid={{uid}}" hover-class="none">
+				<text class="cuIcon-discover text-green"></text>
+				<text class="text-grey">ta的圈子</text>
+			</navigator>
+		</view>
+	</view>
+	<view class="cu-tabbar-height"></view>
+</scroll-view>

@@ -1,0 +1,35 @@
+@import "/colorui/main.wxss";
+@import "/colorui/icon.wxss";
+@import "/colorui/animation.wxss";
+@import "/lib/weui.wxss";
+
+.picker{
+    padding: 13px;
+    background-color: #FFFFFF;
+}
+
+.topswiper {
+	margin-top: 100rpx;
+}
+
+.single {
+	height: 75vh;
+}
+
+.authority {
+  background-image: url(https://pic.gksec.com/2020/08/03/05f18caa48fb7/bg-2020.gif);
+  background-size: 100% 100%;
+  height: 100vh;
+}
+
+.top {
+  height: 70vh;
+}
+
+.text {
+  height: 7.5vh;
+}
+
+.bottom {
+  height: 22.5vh;
+}

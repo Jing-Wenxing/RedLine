@@ -1,0 +1,136 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="content" style="color: balck">{{title}}</view>
+</cu-custom>
+
+<view class="cu-list menu sm-border" wx:if="{{title=='账户信息'}}">
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">昵称</text>
+		</view>
+		<view class="action text-right">
+			<input placeholder="请填入昵称" value="{{psrsonal.username}}" maxlength="{{10}}" data-name='psrsonal.username' bindinput="inputs"></input>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">个性签名</text>
+		</view>
+		<view class="action text-right">
+			<input placeholder="说点什么吧" value="{{psrsonal.signature}}" maxlength="{{20}}" data-name='psrsonal.signature' bindinput="inputs"></input>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">姓</text>
+		</view>
+		<view class="action text-right">
+			<input placeholder="请填入真实的姓氏" value="{{psrsonal.firstname}}" maxlength="{{5}}" data-name='psrsonal.firstname' bindinput="inputs"></input>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">名</text>
+		</view>
+		<view class="action text-right">
+			<input placeholder="请填入真实的名字" value="{{psrsonal.lastname}}" maxlength="{{5}}" data-name='psrsonal.lastname' bindinput="inputs"></input>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">年级</text>
+		</view>
+		<view class="action text-right">
+			<picker mode="selector" bindchange="bindGradeChange" range="{{gradearray}}">
+				<view class="picker">
+					<text>{{psrsonal.grade}} 级</text>
+				</view>
+			</picker>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">专业</text>
+		</view>
+		<view class="action text-right">
+			<picker mode="selector" bindchange="bindProfessionChange" range="{{professionarray}}">
+						<view class="picker">
+							<text>{{personal.profession}} 专业</text>
+						</view>
+					</picker>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">班级</text>
+		</view>
+		<view class="action text-right">
+			<picker mode="selector" bindchange="bindClassChange" range="{{classarray}}">
+				<view class="picker">
+					<text>{{psrsonal.class}} 班</text>
+				</view>
+			</picker>
+		</view>
+	</view>
+</view>
+
+<view class="cu-list menu sm-border" wx:if="{{title=='联系方式'}}">
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">手机号</text>
+		</view>
+		<view class="action text-right">
+			<input placeholder="请填入手机号" type="number" value="{{psrsonal.phonenumber}}" maxlength="{{11}}" data-name='psrsonal.phonenumber' bindinput="inputs"></input>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">微信号</text>
+		</view>
+		<view class="action text-right">
+			<input placeholder="请填入微信号" value="{{psrsonal.wxnumber}}" maxlength="{{10}}" data-name='psrsonal.wxnumber' bindinput="inputs"></input>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">QQ号</text>
+		</view>
+		<view class="action text-right">
+			<input placeholder="请填入QQ号" type="number" value="{{psrsonal.qqnumber}}" maxlength="{{15}}" data-name='psrsonal.qqnumber' bindinput="inputs"></input>
+		</view>
+	</view>
+</view>
+
+<view class="cu-list menu sm-border" wx:if="{{title=='工作信息'}}">
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">公司</text>
+		</view>
+		<view class="action text-right" style="width: 400rpx;">
+			<input placeholder="请填入公司" value="{{psrsonal.company}}" maxlength="{{30}}" data-name='psrsonal.company' bindinput="inputs"></input>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">地点</text>
+		</view>
+		<view class="action text-right">
+			<picker mode="region" bindchange="bindAreaChange" value="{{psrsonal.area}}">
+			<view class="picker">
+				<text>{{psrsonal.area[0]}} {{psrsonal.area[1]}} {{psrsonal.area[2]}}</text>
+			</view>
+		</picker>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="text-grey">简历</text>
+		</view>
+		<view class="action">
+			<textarea bindinput="inputs" placeholder="请填入简历" value="{{psrsonal.resume}}" data-name='psrsonal.resume' maxlength="{{150}}"></textarea>
+		</view>
+	</view>
+</view>
+
+<view class="margin flex justify-center">
+	<button class="cu-btn bg-red shadow-blur" wx:if="{{save}}" bindtap="saveupdate">保存</button>
+</view>

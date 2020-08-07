@@ -1,0 +1,260 @@
+//index.js
+//获取应用实例
+const app = getApp()
+var myDate = new Date()
+
+Page({
+  data: {
+    //判断小程序的API，回调，参数，组件等是否在当前版本可用。
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    isHide: false,
+    PageCur: 'home',
+    StatusBar: app.globalData.StatusBar,
+    CustomBar: app.globalData.CustomBar,
+    save: false,
+    gradearray: [],
+    classarray: ['1', '2', '3', '4', '5', '6', '7', '8', ],
+    professionarray: ['国际经济与贸易', '金融学', '市场营销', '会计学', '法学', '人力资源管理', '旅游管理', '财务管理', '英语', '日语', '汉语言文学', '播音与主持艺术', '广播电视编导', '摄影', '视觉传达设计', '艺术设计', '环境设计', '工业设计', '产品设计', '园林', '风景园林', '电子信息工程', '计算机科学与技术', '软件工程', '土木工程', '物流工程', '食品科学与工程', '工程管理', ],
+    personal: {
+      // username: '',
+      // firstname: '',
+      // lastname: '',
+      // grade: '',
+      // profession: '',
+      // class: '',
+      // area: '',
+
+      username: '清欢挽歌',
+      firstname: '长',
+      lastname: '者',
+      grade: '2018',
+      profession: '计算机科学与技术',
+      class: '1',
+      area: ['湖南省', '长沙市', '芙蓉区'],
+    },
+    searchvalue: '',
+    customItem: '',
+    // 地址值
+    area: ['湖南省', '长沙市', '芙蓉区'],
+    cardCur: 0,
+    swiperList: [],
+  },
+  bindGradeChange: function (e) {
+    var url = 'personal.grade'
+    this.setData({
+      [url]: this.data.gradearray[e.detail.value]
+    })
+  },
+  bindClassChange: function (e) {
+    var url = 'personal.class'
+    this.setData({
+      [url]: this.data.classarray[e.detail.value]
+    })
+  },
+  bindProfessionChange: function (e) {
+    var url = 'personal.profession'
+    this.setData({
+      [url]: this.data.professionarray[e.detail.value]
+    })
+  },
+  bindAreaChange: function (e) {
+    var url = 'personal.area'
+    this.setData({
+      [url]: e.detail.value
+    })
+  },
+  saveupdate() {
+    if (this.data.personal.username != '' && this.data.personal.firstname != '' && this.data.personal.lastname != '' && this.data.personal.grade != '' && this.data.personal.profession != '' && this.data.personal.class != '' && this.data.personal.area != '' && this.data.personal.username != null && this.data.personal.firstname != null && this.data.personal.lastname != null && this.data.personal.grade != null && this.data.personal.profession != null && this.data.personal.class != null && this.data.personal.area != null) {
+      // 示例保存
+      wx.showLoading({
+        title: '保存中...',
+        mask: true
+      });
+
+      // 注意这里的loading取消
+      setTimeout(function () {
+        wx.hideLoading()
+      }, 500)
+
+      /* 这里写后端上传代码 */
+
+      this.setData({
+        save: false,
+      })
+    }
+  },
+  inputs(e) {
+    
+    let value = e.detail.value;
+    var str = e.currentTarget.dataset.name;
+    this.setData({
+      [str]: value,
+      save: true
+    });
+  },
+  onLoad: function () {
+    
+    // 获取年份列表
+    var year = myDate.getFullYear();
+    var gradearray = []
+
+    for (let int = 2002; int <= year; int++) {
+      gradearray.push(int.toString())
+    }
+
+    var swiperLists = [{
+          love: true,
+          cid: '10010',
+          avatarurl: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg',
+          groupname: '计算机科学与技术',
+          grouptag: [{
+              tagtext: '信工院'
+            },
+            {
+              tagtext: '2018级'
+            },
+            {
+              tagtext: '1班'
+            },
+          ],
+          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        },
+        {
+          love: true,
+          cid: '10002',
+          avatarurl: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg',
+          groupname: '计算机科学与技术',
+          grouptag: [{
+              tagtext: '信工院'
+            },
+            {
+              tagtext: '2018级'
+            },
+            {
+              tagtext: '2班'
+            },
+          ],
+          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        },
+      ]
+
+      this.setData({
+        gradearray: gradearray,
+        swiperList: swiperLists,
+      });
+
+    // 查看是否授权
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: function (res) {
+              // 用户已经授权过,不需要显示授权页面,所以不需要改变 isHide 的值
+              // 根据自己的需求有其他操作再补充
+              // 我这里实现的是在用户授权成功后，调用微信的 wx.login 接口，从而获取code
+              wx.login({
+                success: res => {
+                  // 获取到用户的 code 之后：res.code
+                  console.log("用户的code:" + res.code);
+                  // 后端锅
+                }
+              });
+            }
+          });
+        } else {
+          // 用户没有授权
+          // 改变 isHide 的值，显示授权页面
+          this.setData({
+            isHide: true
+          });
+        }
+      }
+    });
+  },
+
+  bindGetUserInfo: function (e) {
+    if (e.detail.userInfo) {
+      //用户按了允许授权按钮
+      
+      // 获取到用户的信息了，打印到控制台上看下
+      console.log("用户的信息如下：");
+      console.log(e.detail.userInfo);
+      //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
+      this.setData({
+        isHide: false
+      });
+    } else {
+      //用户按了拒绝按钮
+      wx.showModal({
+        title: '警告',
+        content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
+        showCancel: false,
+        confirmText: '返回授权',
+        success: function (res) {
+          // 用户没有授权成功，不需要改变 isHide 的值
+          if (res.confirm) {
+            console.log('用户点击了“返回授权”');
+          }
+        }
+      });
+    }
+  },
+  // 导航切换函数
+  NavChange(e) {
+    this.setData({
+      PageCur: e.currentTarget.dataset.cur
+    })
+  },
+
+  // 搜索页切换函数
+  pagechangesearch() {
+    
+    let searchvalue = this.data.searchvalue;
+
+    if (searchvalue != '') {
+      wx.navigateTo({
+        url: '/pages/home/search/search?searchvalue=' + searchvalue,
+      })
+    }
+  },
+  // 搜索值确定
+  updatesearchvalue(e) {
+    
+    this.setData({
+      searchvalue: e.detail.value,
+    })
+  },
+  // 地址切换函数
+  bindAreaChange: function (e) {
+    this.setData({
+      area: e.detail.value
+    })
+
+    // 后端代码
+    // 上传改变地域的值
+  },
+  // cardSwiper
+  cardSwiper(e) {
+    this.setData({
+      cardCur: e.detail.current
+    })
+  },
+  /* ===== 自定义函数 ===== */
+  // 关注状态改变
+  lovechange(event) {
+    console.log(this.data.swiperList[event.target.dataset.index].love)
+    console.log(event)
+    var dates = 'swiperList[' + event.target.dataset.index + '].love'
+
+    this.setData({
+      [dates]: !event.target.dataset.love,
+    })
+
+    console.log(this.data.swiperList[event.target.dataset.index].love)
+
+    // 后端逻辑
+    // 两个函数
+    // 删除用户表中，圈子数组的本圈子cid
+    // 删除圈子表中，用户数组的用户标识uid
+  },
+})

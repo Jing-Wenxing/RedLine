@@ -1,7 +1,4 @@
 {
   "usingComponents": {
-    "home": "/pages/home/home/home",
-    "group": "/pages/groups/all/all",
-    "personal": "/pages/personal/home/home"
   }
 }

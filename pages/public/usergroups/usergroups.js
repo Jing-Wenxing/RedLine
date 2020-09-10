@@ -5,42 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
+    groups : [],
     uid: '',
-    groupList: [{
-        love: true,
-        cid: '10001',
-        avatarurl: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg',
-        groupname: '计算机科学与技术',
-        grouptag: [{
-            tagtext: '信工院'
-          },
-          {
-            tagtext: '2018级'
-          },
-          {
-            tagtext: '1班'
-          },
-        ],
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-      },
+    groupList: [
       {
-        love: true,
-        cid: '10002',
+        isShow: true,
         avatarurl: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg',
         groupname: '计算机科学与技术',
-        grouptag: [{
-            tagtext: '信工院'
-          },
-          {
-            tagtext: '2018级'
-          },
-          {
-            tagtext: '2班'
-          },
-        ],
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-      },
-    ],
+        grouptag: ['信工院'],
+        description: ''
+      }
+    ]
   },
 
   /**
@@ -51,6 +26,60 @@ Page({
     this.setData({
       uid: options.uid
     })
+
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
+    var that = this;
+    
+    wx.cloud.callFunction({
+      name: 'profileService',
+      data: {
+        action:'getOtherProfile',
+        oid: options.uid
+      },
+      success: function(res) {
+        console.log(res.result.data[0].group)
+        that.setData({
+          groups : res.result.data[0].group
+        })
+      },
+      fail: function(res){
+        wx.hideLoading()
+        wx.showToast({
+          title: '获取失败，请重试',
+          icon: 'none',
+          duration: 1000
+        })
+        console.log(res)
+      }
+    })
+  
+    wx.cloud.callFunction({
+      name: 'circleService',
+      data: {
+        action:'getGroupById',
+        idList: that.data.groups
+      },
+      success: function(res) {
+        console.log(res)
+        that.setData({
+          groupList : res.result.data
+        })
+        wx.hideLoading()
+      },
+      fail: function(res){
+        wx.hideLoading()
+        wx.showToast({
+          title: '获取失败，请重试',
+          icon: 'none',
+          duration: 1000
+        })
+      }
+    })
+
+    
   },
 
   /**

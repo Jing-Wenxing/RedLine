@@ -13,7 +13,7 @@
 </view>
 
 <view wx:else>
-	<view wx:if="{{personal.username==''||personal.firstname==''||personal.lastname==''||personal.grade==''||personal.profession==''||personal.class==''||personal.area==''||personal.username==null||personal.firstname==null||personal.lastname==null||personal.grade==null||personal.profession==null||personal.class==null||personal.area==null||save}}">
+	<view wx:if="{{isform}}">
 		<cu-custom bgColor="bg-white">
 			<view slot="content" style="color: balck">资料填写</view>
 		</cu-custom>
@@ -23,7 +23,7 @@
 				<view class="content">
 					<text class="text-grey">昵称</text>
 				</view>
-				<view class="action text-right">
+				<view class="action text-right" style="width: 80%;">
 					<input placeholder="请填入昵称" value="{{personal.username}}" maxlength="{{10}}" data-name='personal.username' bindinput="inputs"></input>
 				</view>
 			</view>
@@ -31,7 +31,7 @@
 				<view class="content">
 					<text class="text-grey">姓</text>
 				</view>
-				<view class="action text-right">
+				<view class="action text-right" style="width: 80%;">
 					<input placeholder="请填入真实的姓氏" value="{{personal.firstname}}" maxlength="{{5}}" data-name='personal.firstname' bindinput="inputs"></input>
 				</view>
 			</view>
@@ -39,15 +39,15 @@
 				<view class="content">
 					<text class="text-grey">名</text>
 				</view>
-				<view class="action text-right">
-					<input placeholder="请填入真实的名字" value="{{personal.lastname}}" maxlength="{{5}}" data-name='personal.lastname' bindinput="inputs"></input>
+				<view class="action text-right" style="width: 80%;">
+					<input placeholder="填入真实的名字更容易让别人找到你" value="{{personal.lastname}}" maxlength="{{5}}" data-name='personal.lastname' bindinput="inputs"></input>
 				</view>
 			</view>
 			<view class="cu-item">
 				<view class="content">
 					<text class="text-grey">年级</text>
 				</view>
-				<view class="action text-right">
+				<view class="action text-right" style="width: 80%;">
 					<picker mode="selector" bindchange="bindGradeChange" range="{{gradearray}}">
 						<view class="picker">
 							<text>{{personal.grade}} 级</text>
@@ -59,7 +59,7 @@
 				<view class="content">
 					<text class="text-grey">专业</text>
 				</view>
-				<view class="action text-right">
+				<view class="action text-right" style="width: 80%;">
 					<picker mode="selector" bindchange="bindProfessionChange" range="{{professionarray}}">
 						<view class="picker">
 							<text>{{personal.profession}} 专业</text>
@@ -71,7 +71,7 @@
 				<view class="content">
 					<text class="text-grey">班级</text>
 				</view>
-				<view class="action text-right">
+				<view class="action text-right" style="width: 80%;">
 					<picker mode="selector" bindchange="bindClassChange" range="{{classarray}}">
 						<view class="picker">
 							<text>{{personal.class}} 班</text>
@@ -83,8 +83,8 @@
 				<view class="content">
 					<text class="text-grey">地点</text>
 				</view>
-				<view class="action text-right">
-					<picker mode="region" bindchange="bindAreaChange" value="{{personal.area}}">
+				<view class="action text-right" style="width: 80%;">
+					<picker mode="region" bindchange="bindAreaChange0" value="{{personal.area}}">
 						<view class="picker">
 							<text>{{personal.area[0]}} {{personal.area[1]}} {{personal.area[2]}}</text>
 							<text class="cuIcon-triangledownfill"></text>
@@ -109,7 +109,7 @@
 				<picker mode="region" bindchange="bindAreaChange" value="{{area}}">
 					<view class="picker">
 						<text class="cuIcon-triangledownfill"></text>
-						<text>{{area[1]}}</text>
+						<text>{{city}}</text>
 					</view>
 				</picker>
 			</view>
@@ -128,29 +128,28 @@
 				<!-- 暂无数据 -->
 				<swiper-item class="cur" wx:if="{{swiperList.length==0}}">
 					<view class="swiper-item single">
+						<navigator hover-class='none' url="/pages/groups/all/all">
+							<view class="cu-card case">
+								<view class="cu-item shadow bg-white padding radius">
+									<!-- 按钮栏 -->
+									<view class="flex justify-between">
+										<view></view>
+									</view>
 
-						<view class="cu-card case">
-							<view class="cu-item shadow bg-white padding radius">
-								<!-- 按钮栏 -->
-								<view class="flex justify-between">
-									<view></view>
-									<button class="cu-btn cuIcon-likefill round sm bg-grey shadow line text-gray"></button>
-								</view>
+									<!-- 圈子头像 -->
+									<view class="flex justify-center align-center margin-bottom" style="height: 35vh;">
+										<view class="cu-avatar max round">
+										</view>
+									</view>
 
-								<!-- 圈子头像 -->
-								<view class="flex justify-center align-center margin-bottom" style="height: 35vh;">
-									<view class="cu-avatar max round">
-										<text class="cuIcon-add" ></text>
+									<!-- 圈子信息 -->
+									<view class="margin-top-xl" style="height: 40vh;">
+										<view class="text-xl text-bold text-black text-center margin-bottom">暂无数据</view>
+										<view class="text-center margin-bottom">请在下方选择你想加入圈子</view>
 									</view>
 								</view>
-
-								<!-- 圈子信息 -->
-								<view class="margin-top-xl" style="height: 40vh;">
-									<view class="text-xl text-bold text-black text-center margin-bottom">暂无数据</view>
-									<view class="text-center margin-bottom">请加入圈子</view>
-								</view>
 							</view>
-						</view>
+						</navigator>
 					</view>
 				</swiper-item>
 
@@ -158,47 +157,42 @@
 				<swiper-item else wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
 					<view class="swiper-item single">
 						<view class="cu-card case">
+
 							<view class="cu-item shadow bg-white padding radius">
-								<!-- 按钮栏 -->
-								<view class="flex justify-between">
-									<navigator hover-class='none' url="/pages/groups/single/single?cid={{item.cid}}&name={{item.groupname}}">
-										<button class="cu-btn cuIcon-more round sm bg-grey shadow line text-black">
-										</button>
-									</navigator>
-									<button class="cu-btn cuIcon-likefill round sm bg-grey shadow line text-{{item.love?'red':'gray'}}" bindtap="lovechange" data-love="{{item.love}}" data-index="{{index}}"></button>
-								</view>
+								<navigator hover-class='none' url="/pages/groups/single/single?cid={{item.cid}}&name={{item.groupname}}">
+									<!-- 圈子头像 -->
+									<view class="flex justify-center align-center" style="height: 35vh;">
+										<view class="cu-avatar max round" style="background-image:url({{item.avatarurl}});"></view>
+									</view>
 
-								<!-- 圈子头像 -->
-								<view class="flex justify-center align-center" style="height: 35vh;">
-									<view class="cu-avatar max round" style="background-image:url({{item.avatarurl}});"></view>
-								</view>
-
-								<!-- 圈子信息 -->
-								<view class="margin-top">
-									<view class="text-xl text-bold text-black margin-bottom">{{item.groupname}}</view>
-									<!-- 圈子标签 -->
-									<view class="flex p-xs margin-bottom-sm mb-sm">
-										<view class="flex flex-sub radius justify-center">
-											<view class="cu-tag line-grey round">标 签</view>
+									<!-- 圈子信息 -->
+									<view class="margin-top">
+										<view class="text-xl text-bold text-black margin-bottom">{{item.groupname}}</view>
+										<!-- 圈子标签 -->
+										<view class="flex p-xs margin-bottom-sm mb-sm">
+											<view class="flex flex-sub radius justify-center">
+												<view class="cu-tag line-grey round">标 签</view>
+											</view>
+											<view class="flex flex-treble radius">
+												<view wx:for="{{item.grouptag}}" wx:key>
+													<text class="text-bold margin-right-sm">{{item}}</text>
+												</view>
+											</view>
 										</view>
-										<view class="flex flex-treble radius">
-											<view wx:for="{{item.grouptag}}" wx:key>
-												<text class="text-bold margin-right-sm">{{item.tagtext}}</text>
+										<!-- 描述 -->
+										<view class="flex p-xs margin-bottom-sm mb-sm" style="height: 25vh;">
+											<view class="flex flex-sub radius justify-center">
+												<view class="cu-tag line-grey round">描 述</view>
+											</view>
+											<view class="flex flex-treble radius">
+												<scroll-view scroll-y="true" style="height: 200rpx">
+													<text>{{item.description}}</text>
+												</scroll-view>
 											</view>
 										</view>
 									</view>
-									<!-- 描述 -->
-									<view class="flex p-xs margin-bottom-sm mb-sm" style="height: 25vh;">
-										<view class="flex flex-sub radius justify-center">
-											<view class="cu-tag line-grey round">描 述</view>
-										</view>
-										<view class="flex flex-treble radius">
-											<scroll-view scroll-y="true" style="height: 200rpx">
-												<text>{{item.description}}</text>
-											</scroll-view>
-										</view>
-									</view>
-								</view>
+								</navigator>
+
 							</view>
 						</view>
 					</view>
@@ -206,6 +200,6 @@
 			</swiper>
 		</view>
 
-		<view class='cu-tabbar-height'></view>
+		<!-- <view class='cu-tabbar-height'></view> -->
 	</view>
 </view>

@@ -22,14 +22,12 @@
 					</view>
 					<view class="text-gray flex" style="padding-top: 5px;">
 						<view wx:for="{{item.grouptag}}" wx:key>
-							<view class="cu-tag round line-gray" style="margin-right: 5px;">{{item.tagtext}}</view>
+							<view class="cu-tag round line-gray" style="margin-right: 5px;">{{item}}</view>
 						</view>
 					</view>
 				</navigator>
 			</view>
-			<view class="action">
-				<button class="cu-btn cuIcon-likefill round sm bg-grey shadow line text-{{item.love?'red':'gray'}}" bindtap="lovechange" data-love="{{item.love}}" data-index="{{index}}"></button>
-			</view>
+
 		</view>
 
 	</view>

@@ -7,19 +7,18 @@ Page({
   data: {
     uid: '',
     psrsonal: {
-      sex: '男',
-      signature: '至味清欢，挽歌铃唱',
-      firstname: '长',
-      lastname: '者',
-      grade: '15',
-      profession: '计算机科学与技术',
-      class: '1',
-      phonenumber: '123456789',
-      wxnumber: '123456789',
-      qqnumber: '123456789',
-      company: '深圳市腾讯计算机系统有限公司',
-      area: '广州 深圳',
-      resume: '我是垃圾',
+      signature: '',
+      firstname: '',
+      lastname: '',
+      grade: '',
+      profession: '',
+      class: '',
+      phonenumber: '',
+      wxnumber: '',
+      qqnumber: '',
+      company: '',
+      area: '',
+      resume: '',
     }
   },
 
@@ -27,9 +26,38 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.uid)
+    var that = this
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
+
     this.setData({
       uid: options.uid
+    })
+
+    wx.cloud.callFunction({
+      name: 'profileService',
+      data: {
+        action:'getOtherProfile',
+        oid: options.uid
+      },
+      success: function(res) {
+        console.log(res.result.data)
+        that.setData({
+          psrsonal:res.result.data[0]
+        })
+        wx.hideLoading()
+      },
+      fail: function(res){
+        wx.hideLoading()
+        wx.showToast({
+          title: '获取失败，请重试',
+          icon: 'none',
+          duration: 1000
+        })
+        console.log(res)
+      }
     })
   },
 

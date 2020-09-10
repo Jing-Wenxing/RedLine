@@ -1,12 +1,12 @@
 <cu-custom bgColor="bg-white" isBack="{{true}}">
 	<view slot="content" style="color: balck">
-		ta的页面{{uid}}
+		ta的页面
 	</view>
 </cu-custom>
 
 <scroll-view scroll-y class="scrollPage">
 	<view class="UCenter-bg">
-		<view class="cu-avatar xxl round margin-bottom" style="background-image:url({{people.avatarurl}});"></view>
+		<view class="cu-avatar xxl round margin-bottom" style="background-image:url('https://6d69-minipro-4x4pl-1302585839.tcb.qcloud.la/rabbit.jpg?sign=8989c2817b7751f336558e85bcabbda9&t=1599761126');"></view>
 		<view class="text-xl">{{people.username}}</view>
 		<view class="margin-top-sm">
 			<text class="padding-left padding-right text-cut">{{people.signature}}</text>

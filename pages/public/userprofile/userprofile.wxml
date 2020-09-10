@@ -4,30 +4,6 @@
 	</view>
 </cu-custom>
 
-<view class="cu-bar bg-white solid-bottom">
-	<view class="action">
-		<text class="cuIcon-title text-red"></text> 账户信息
-	</view>
-</view>
-
-<view class="cu-list menu sm-border">
-	<view class="cu-item">
-		<view class="content">
-			<text class="text-grey">性别</text>
-		</view>
-		<view class="action">
-			<text class="text-grey">{{psrsonal.sex}}</text>
-		</view>
-	</view>
-	<view class="cu-item">
-		<view class="content">
-			<text class="text-grey">个性签名</text>
-		</view>
-		<view class="action">
-			<text class="text-grey">{{psrsonal.signature}}</text>
-		</view>
-	</view>
-</view>
 
 <view class="cu-bar bg-white solid-bottom margin-top">
 	<view class="action">

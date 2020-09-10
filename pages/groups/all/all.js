@@ -1,4 +1,10 @@
 const app = getApp();
+
+wx.cloud.init({
+  env: 'minipro-4x4pl',
+  traceUser: true,
+})
+
 Page({
 
   /**
@@ -6,43 +12,7 @@ Page({
    */
   data: {
     CustomBar: app.globalData.CustomBar,
-    groupList: [{
-        love: true,
-        cid: '10001',
-        isShow: true,
-        avatarurl: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg',
-        groupname: '计算机科学与技术',
-        grouptag: [{
-            tagtext: '信工院'
-          },
-          {
-            tagtext: '2018级'
-          },
-          {
-            tagtext: '1班'
-          },
-        ],
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-      },
-      {
-        love: true,
-        cid: '10002',
-        isShow: true,
-        avatarurl: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg',
-        groupname: '计算机科学与技术',
-        grouptag: [{
-            tagtext: '信工院'
-          },
-          {
-            tagtext: '2018级'
-          },
-          {
-            tagtext: '2班'
-          },
-        ],
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-      },
-    ],
+    groupList: [],
   },
   searchIcon(e) {
     let key = e.detail.value.toLowerCase();
@@ -62,6 +32,7 @@ Page({
   },
   /* ===== 自定义函数 ===== */
   // 关注状态改变
+  /*
   lovechange(event) {
     console.log(this.data.groupList[event.target.dataset.index].love)
     console.log(event)
@@ -78,10 +49,36 @@ Page({
     // 删除用户表中，圈子数组的本圈子cid
     // 删除圈子表中，用户数组的用户标识uid
   },
+  */
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
+    var that = this;
+    wx.cloud.callFunction({
+      name: 'circleService',
+      data: {
+        action:'getAllGroup',
+      },
+      success: function(res) {
+        that.setData({
+          groupList : res.result.data
+        })
+        wx.hideLoading()
+      },
+      fail: function(res){
+        wx.hideLoading()
+        wx.showToast({
+          title: '获取失败，请重试',
+          icon: 'none',
+          duration: 1000
+        })
+      }
+    })
 
   },
 

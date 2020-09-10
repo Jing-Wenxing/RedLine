@@ -1,4 +1,8 @@
 // pages/personal/workresume/workresume.js
+wx.cloud.init({
+  env: 'minipro-4x4pl',
+  traceUser: true,
+})
 var myDate = new Date()
 
 Page({
@@ -8,24 +12,24 @@ Page({
    */
   data: {
     title: '',
-    save: false,
+    save: true,
     gradearray: [],
     classarray: ['1', '2', '3', '4', '5', '6', '7', '8', ],
     professionarray: ['国际经济与贸易', '金融学', '市场营销', '会计学', '法学', '人力资源管理', '旅游管理', '财务管理', '英语', '日语', '汉语言文学', '播音与主持艺术', '广播电视编导', '摄影', '视觉传达设计', '艺术设计', '环境设计', '工业设计', '产品设计', '园林', '风景园林', '电子信息工程', '计算机科学与技术', '软件工程', '土木工程', '物流工程', '食品科学与工程', '工程管理', ],
     psrsonal: {
-      username: '清欢挽歌',
-      signature: '至味清欢，挽歌铃唱',
-      firstname: '长',
-      lastname: '者',
-      grade: '2018',
-      profession: '计算机科学与技术',
-      class: '1',
-      phonenumber: '123456789',
-      wxnumber: '123456789',
-      qqnumber: '123456789',
-      company: '深圳市腾讯计算机系统有限公司',
-      area: ['湖南省', '长沙市', '芙蓉区'],
-      resume: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      username: '',
+      signature: '',
+      firstname: '',
+      lastname: '',
+      grade: '',
+      profession: '',
+      class: '',
+      phonenumber: '',
+      wxnumber: '',
+      qqnumber: '',
+      company: '',
+      area: [],
+      resume: '',
     }
   },
   bindGradeChange: function (e) {
@@ -53,21 +57,56 @@ Page({
     })
   },
   saveupdate() {
-    // 示例保存
+    var form = this.data.psrsonal
+    var id =  form._id
+    var verify = true
     wx.showLoading({
-      title: '保存中...',
+      title: '保存中',
       mask: true
     });
 
-    setTimeout(function () {
-      wx.hideLoading()
-    }, 500)
+    form['city'] = form['area'][1]
+    if(form['phonenumber'] != null && form['phonenumber'].length != 11){
+      wx.showToast({
+        title: '手机号应为11位',
+        icon: 'none',
+        duration: 1000
+      })
+      verify = false
+    }
 
-    /* 这里写后端上传代码 */
+    if(verify){
+      delete form._id;
+      wx.cloud.callFunction({
+        name: 'profileService',
+        data: {
+          action:'setProfile',
+          Collectionid: id,
+          updateData: form
+        },
+        success: function(res) {
+          wx.hideLoading()
+          console.log(res)
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            duration: 1000
+          })
+        },
+        fail: function(res){
+          wx.hideLoading()
+          wx.showToast({
+            title: '提交失败',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+      })
+      this.setData({
+        save: false,
+      })
+    }
 
-    this.setData({
-      save: false,
-    })
   },
   inputs(e) {
     let that = this;
@@ -82,12 +121,38 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
+    var that = this;
+    wx.cloud.callFunction({
+      name: 'profileService',
+      data: {
+        action:'getProfile',
+      },
+      success: function(res) {
+        that.setData({
+          psrsonal : res.result.data[0]
+        })
+        wx.hideLoading()
+      },
+      fail: function(res){
+        wx.hideLoading()
+        wx.showToast({
+          title: '获取失败，请重试',
+          icon: 'none',
+          duration: 1000
+        })
+      }
+    })
+
     // 获取年份列表
     var year = myDate.getFullYear();
     var gradearray = []
 
-    for (let int = 2002; int <= year; int++) {
-      gradearray.push(int.toString())
+    for (let i = year; i >= 2002; i--) {
+      gradearray.push(i.toString())
     }
 
     this.setData({

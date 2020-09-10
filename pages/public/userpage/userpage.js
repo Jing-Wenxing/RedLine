@@ -7,9 +7,8 @@ Page({
   data: {
     uid: '',
     people: {
-      username: '清欢挽歌',
-      signature: '至味清欢，挽歌铃唱',
-      avatarurl: 'https://pic.gksec.com/2020/07/08/561775df28517/1234d5df46sdf.jpg',
+      username: '',
+      signature: ''
     }
   },
 
@@ -17,16 +16,48 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
+    
     this.setData({
       uid: options.uid
     })
+    
+    wx.cloud.callFunction({
+      name: 'profileService',
+      data: {
+        action:'getOtherProfile',
+        oid: options.uid
+      },
+      success: function(res) {
+        console.log(res.result.data)
+        that.setData({
+          people:res.result.data
+        })
+        wx.hideLoading()
+      },
+      fail: function(res){
+        wx.hideLoading()
+        wx.showToast({
+          title: '获取失败，请重试',
+          icon: 'none',
+          duration: 1000
+        })
+      }
+    })
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    var that = this
+    
+    console.log(that.data.uid)
   },
 
   /**

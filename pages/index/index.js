@@ -3,39 +3,47 @@
 const app = getApp()
 var myDate = new Date()
 
+//定位服务
+var QQMapWX = require('../../lib/qqmap-wx-jssdk.js');
+
+var qqmapsdk = new QQMapWX({
+  key:'FDEBZ-N6B66-LGYSC-M23JB-7N3AT-4NFSP'
+});
+
+wx.cloud.init({
+  env: 'minipro-4x4pl',
+  traceUser: true,
+})
+
 Page({
   data: {
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     isHide: false,
+    isform: true,
     PageCur: 'home',
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     save: false,
     gradearray: [],
-    classarray: ['1', '2', '3', '4', '5', '6', '7', '8', ],
+    classarray: ['1', '2', '3', '4', '5', '6', '7', '8'],
     professionarray: ['国际经济与贸易', '金融学', '市场营销', '会计学', '法学', '人力资源管理', '旅游管理', '财务管理', '英语', '日语', '汉语言文学', '播音与主持艺术', '广播电视编导', '摄影', '视觉传达设计', '艺术设计', '环境设计', '工业设计', '产品设计', '园林', '风景园林', '电子信息工程', '计算机科学与技术', '软件工程', '土木工程', '物流工程', '食品科学与工程', '工程管理', ],
     personal: {
-      // username: '',
-      // firstname: '',
-      // lastname: '',
-      // grade: '',
-      // profession: '',
-      // class: '',
-      // area: '',
-
-      username: '清欢挽歌',
-      firstname: '长',
-      lastname: '者',
-      grade: '2018',
-      profession: '计算机科学与技术',
-      class: '1',
-      area: ['湖南省', '长沙市', '芙蓉区'],
+       username: '',
+       firstname: '',
+       lastname: '',
+       fullname:'',
+       grade: '',
+       profession: '',
+       class: '',
+       area: [],
+       city: '',
+       group: []
     },
     searchvalue: '',
     customItem: '',
     // 地址值
-    area: ['湖南省', '长沙市', '芙蓉区'],
+    area: ['', '选择城市', ''],
     cardCur: 0,
     swiperList: [],
   },
@@ -57,34 +65,79 @@ Page({
       [url]: this.data.professionarray[e.detail.value]
     })
   },
-  bindAreaChange: function (e) {
+  bindAreaChange0: function (e) {
     var url = 'personal.area'
     this.setData({
       [url]: e.detail.value
     })
   },
   saveupdate() {
-    if (this.data.personal.username != '' && this.data.personal.firstname != '' && this.data.personal.lastname != '' && this.data.personal.grade != '' && this.data.personal.profession != '' && this.data.personal.class != '' && this.data.personal.area != '' && this.data.personal.username != null && this.data.personal.firstname != null && this.data.personal.lastname != null && this.data.personal.grade != null && this.data.personal.profession != null && this.data.personal.class != null && this.data.personal.area != null) {
-      // 示例保存
+    let that = this;
+    var isComplete = true;
+    var form = this.data.personal;
+
+    //检测表单是否完整填写
+    for(var i in form){
+      if(i=="fullname"){
+        continue
+      }
+      if(i=="city"){
+        continue
+      }
+      if((typeof form[i]) == 'object' && JSON.stringify(form[i]) == "{}"){
+        isComplete = false
+      }
+      if((typeof form[i]) == 'string' && form[i] == ""){
+        isComplete = false
+      }
+    }
+    if(!isComplete){
+      wx.showToast({
+        title: '请完整填写资料',
+        icon: 'none',
+        duration: 1500
+      })
+    }
+    if(isComplete){
+      // 保存
       wx.showLoading({
-        title: '保存中...',
+        title: '保存中',
         mask: true
       });
 
-      // 注意这里的loading取消
-      setTimeout(function () {
-        wx.hideLoading()
-      }, 500)
-
-      /* 这里写后端上传代码 */
-
-      this.setData({
-        save: false,
+      form['fullname'] = form['firstname'] + form['lastname']
+      form['city'] = form['area'][1]
+      wx.cloud.callFunction({
+        name: 'profileService',
+        data: {
+          action:'addProfile',
+          addData: form
+        },
+        success: function(res) {
+          wx.hideLoading()
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            duration: 1000
+          })
+          that.setData({
+            isform: false
+          })
+        },
+        fail: function(res){
+          wx.hideLoading()
+          wx.showToast({
+            title: '提交失败，请重试',
+            icon: 'none',
+            duration: 1000
+          })
+        }
       })
+
     }
+    
   },
   inputs(e) {
-    
     let value = e.detail.value;
     var str = e.currentTarget.dataset.name;
     this.setData({
@@ -93,55 +146,19 @@ Page({
     });
   },
   onLoad: function () {
-    
+    var that = this;
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
     // 获取年份列表
     var year = myDate.getFullYear();
     var gradearray = []
-
-    for (let int = 2002; int <= year; int++) {
-      gradearray.push(int.toString())
+    for (let i = year; i >= 2002; i--) {
+      gradearray.push(i.toString())
     }
 
-    var swiperLists = [{
-          love: true,
-          cid: '10010',
-          avatarurl: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg',
-          groupname: '计算机科学与技术',
-          grouptag: [{
-              tagtext: '信工院'
-            },
-            {
-              tagtext: '2018级'
-            },
-            {
-              tagtext: '1班'
-            },
-          ],
-          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-        },
-        {
-          love: true,
-          cid: '10002',
-          avatarurl: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg',
-          groupname: '计算机科学与技术',
-          grouptag: [{
-              tagtext: '信工院'
-            },
-            {
-              tagtext: '2018级'
-            },
-            {
-              tagtext: '2班'
-            },
-          ],
-          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-        },
-      ]
-
-      this.setData({
-        gradearray: gradearray,
-        swiperList: swiperLists,
-      });
+    var swiperLists = []
 
     // 查看是否授权
     wx.getSetting({
@@ -155,7 +172,7 @@ Page({
               wx.login({
                 success: res => {
                   // 获取到用户的 code 之后：res.code
-                  console.log("用户的code:" + res.code);
+                  //console.log("用户的code:" + res.code);
                   // 后端锅
                 }
               });
@@ -170,6 +187,77 @@ Page({
         }
       }
     });
+    //是否填写过资料
+    wx.cloud.callFunction({
+      name: 'profileService',
+      data: {
+        action:'getProfile',
+      },
+      success: function(res) {
+        that.setData({
+          isform : (res.result.data[0] == null)
+        })
+        if(res.result.data[0] != null){
+          wx.cloud.callFunction({
+            name: 'profileService',
+            data: {
+              action:'getProfile',
+            },
+            success: function(res) {
+              that.setData({
+                swiperList :  res.result.data[0].group
+              })
+              wx.hideLoading()
+            },
+            fail: function(res){
+              wx.hideLoading()
+              wx.showToast({
+                title: '获取失败，请重试',
+                icon: 'none',
+                duration: 1000
+              })
+            }
+          })
+
+        }
+
+        wx.hideLoading()
+      },
+      fail: function(res){
+        wx.hideLoading()
+        wx.showToast({
+          title: '获取失败，请重试',
+          icon: 'none',
+          duration: 1000
+        })
+      }
+    })
+
+
+    this.setData({
+      gradearray: gradearray,
+      swiperList: swiperLists,
+    });
+
+    //定位信息
+    var _this = this;
+    qqmapsdk.reverseGeocoder({
+      success: function(res) {//成功后的回调
+        _this.setData({
+          city :res.result.address_component.city
+          })
+        console.log(res);
+      },
+      fail: function(error) {
+        _this.setData({
+          city:'位置获取失败'
+      })
+        console.error(error);
+      },
+      complete: function(res) {
+        //console.log(res);
+      }
+    })
   },
 
   bindGetUserInfo: function (e) {
@@ -208,14 +296,20 @@ Page({
 
   // 搜索页切换函数
   pagechangesearch() {
-    
     let searchvalue = this.data.searchvalue;
-
     if (searchvalue != '') {
       wx.navigateTo({
-        url: '/pages/home/search/search?searchvalue=' + searchvalue,
+        url: '/pages/home/search/search?searchvalue=' + searchvalue + '&city=' + this.data.city,
       })
     }
+    else{
+      wx.showToast({
+        title: '请填写要搜索的内容',
+        icon: 'none',
+        duration: 1000
+      })
+    }
+
   },
   // 搜索值确定
   updatesearchvalue(e) {
@@ -227,7 +321,8 @@ Page({
   // 地址切换函数
   bindAreaChange: function (e) {
     this.setData({
-      area: e.detail.value
+      area: e.detail.value,
+      city: e.detail.value[1]
     })
 
     // 后端代码
@@ -239,8 +334,15 @@ Page({
       cardCur: e.detail.current
     })
   },
+    /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+      this.onLoad()
+  }
   /* ===== 自定义函数 ===== */
   // 关注状态改变
+  /*
   lovechange(event) {
     console.log(this.data.swiperList[event.target.dataset.index].love)
     console.log(event)
@@ -251,10 +353,6 @@ Page({
     })
 
     console.log(this.data.swiperList[event.target.dataset.index].love)
-
-    // 后端逻辑
-    // 两个函数
-    // 删除用户表中，圈子数组的本圈子cid
-    // 删除圈子表中，用户数组的用户标识uid
   },
+  */
 })

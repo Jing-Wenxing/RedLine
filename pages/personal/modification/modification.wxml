@@ -24,14 +24,6 @@
 	</view>
 	<view class="cu-item">
 		<view class="content">
-			<text class="text-grey">个性签名</text>
-		</view>
-		<view class="action">
-			<text class="text-grey">{{psrsonal.signature}}</text>
-		</view>
-	</view>
-	<view class="cu-item">
-		<view class="content">
 			<text class="text-grey">姓名</text>
 		</view>
 		<view class="action">

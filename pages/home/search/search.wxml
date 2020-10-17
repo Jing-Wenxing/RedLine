@@ -2,6 +2,8 @@
 	<view slot="content" style="color: balck">搜索</view>
 </cu-custom>
 
+
+
 <view class="cu-bar bg-white" wx:if="{{userList!=0}}">
 	<view class="action">
 		<text class="cuIcon-titles text-red"></text>
@@ -26,9 +28,6 @@
 					</navigator>
 				</view>
 			</view>
-		</view>
-		<view class="padding bg-white" wx:if="{{groupList==0}}">
-			<view style="text-align:center">没有更多结果了</view>
 		</view>
 	</view>
 
@@ -57,7 +56,38 @@
 				</view>
 			</view>
 		</view>
+
+	</view>
+
+<view class="cu-bar bg-white">
+	<view class="action">
+		<text class="cuIcon-titles text-red"></text>
+		<text class="text-xl text-bold">同城</text>
+	</view>
+</view>
+
+	<view class="margin-bottom-sm" wx:if="{{localUserList!=0}}">
+		<view class="cu-list menu-avatar recommendlist">
+			<view class="cu-item padding solids-bottom" wx:for="{{localUserList}}" wx:key>
+				<view class="cu-avatar radius lg" style="background-image:url('https://6d69-minipro-4x4pl-1302585839.tcb.qcloud.la/rabbit.jpg?sign=8989c2817b7751f336558e85bcabbda9&t=1599761126');"></view>
+				<view class="content">
+					<navigator hover-class='none' url="/pages/public/userpage/userpage?uid={{item._openid}}">
+						<view class="text-grey">
+							<text class="text-cut text-lg text-black">{{item.firstname}} 同学</text>
+						</view>
+						<view class="text-gray flex" style="padding-top: 5px;">
+							<view class="cu-tag round line-gray" style="margin-right: 5rpx;">{{item.profession}}</view>
+							<view class="cu-tag round line-gray" style="margin-right: 5rpx;">{{item.grade}}级</view>
+							<view class="cu-tag round line-gray" style="margin-right: 5rpx;">{{item.area[1]}}</view>
+						</view>
+					</navigator>
+				</view>
+			</view>
+		</view>
+	</view>
+
+
+
 		<view class="padding bg-white">
 			<view style="text-align:center">没有更多结果了</view>
 		</view>
-	</view>

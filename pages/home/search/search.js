@@ -50,7 +50,9 @@ Page({
           key : city
         },
         success: function(res) {
+
           var localUserLi = res['result']['data']
+          console.log(localUserLi)
           that.setData({
             localUserList:localUserLi
           })
